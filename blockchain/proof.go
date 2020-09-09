@@ -60,6 +60,17 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 
 }
 
+func (pow *ProofOfWork) Validate() bool {
+	var intHash big.Int
+
+	data := pow.InitData(pow.Block.Nonce)
+
+	hash := sha256.Sum256(data)
+	intHash.SetBytes(hash[:])
+
+	return intHash.Cmp(pow.Target) == -1
+}
+
 func ToHex(num int64) []byte {
 	buff := new(bytes.Buffer)
 	err := binary.Write(buff, binary.BigEndian, num)
