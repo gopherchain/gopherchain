@@ -3,7 +3,6 @@ package blockchain
 import (
 	"bytes"
 	"encoding/gob"
-	"log"
 )
 
 type Block struct {
@@ -33,9 +32,9 @@ func (b *Block) Serialize() []byte {
 	enconder := gob.NewEncoder(&res)
 
 	err := enconder.Encode(b)
-	if err != nil {
-		log.Panic(err)
-	}
+
+	Handle(err)
+
 	return res.Bytes()
 }
 
@@ -46,9 +45,7 @@ func Deserialize(data []byte) *Block {
 
 	err := decoder.Decode(&block)
 
-	if err != nil {
-		log.Panic(err)
-	}
+	Handle(err)
 
 	return &block
 }
