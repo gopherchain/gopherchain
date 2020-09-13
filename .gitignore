@@ -5,3 +5,6 @@ gochain
 
 # For Badger database files
 blocks
+
+# Personal wallets data
+mywallets
