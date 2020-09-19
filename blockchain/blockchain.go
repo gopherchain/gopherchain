@@ -16,7 +16,8 @@ import (
 )
 
 const (
-	dbPath = "./blocks_%s"
+	dbPath      = "./blocks_%s"
+	genesisData = "First Transaction from Genesis"
 )
 
 type BlockChain struct {
@@ -39,6 +40,7 @@ func InitBlockChain(address, nodeID string) *BlockChain {
 		runtime.Goexit()
 	}
 
+	var lastHash []byte
 	opts := badger.DefaultOptions(dbPath)
 
 	db, err := openDB(path, opts)
