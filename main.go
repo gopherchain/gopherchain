@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/juanhuttemann/gochain/cli"
+	"github.com/gopherchain/gophercoin/cli"
 )
 
 func main() {
