@@ -8,9 +8,8 @@ install:
 - 
 script:
 - go get -t -v ./...
-- gox -os="linux" -arch="386 amd64"
+- gox -os="linux" -arch="amd64"
 - env GOOS=windows GOARCH=amd64 go build -o gophercoin-windows-amd64.exe
-- env GOOS=windows GOARCH=386 go build -o gophercoin-windows-386.exe
 
 deploy:
   edge: true
@@ -24,7 +23,5 @@ deploy:
   skip_cleanup: true
   file:
   - gophercoin-windows-amd64.exe
-  - gophercoin-windows-386.exe
   - gophercoin-linux-amd64
-  - gophercoin-linux-386
   draft: true
