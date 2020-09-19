@@ -3,8 +3,11 @@
 *.exe
 gochain
 
-# For Badger database files
+# For Blockchain database files
 blocks
 
 # Personal wallets data
-mywallets
+*.data
+
+#Environment variables file
+.env
