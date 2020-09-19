@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"strconv"
 
+	"github.com/joho/godotenv"
 	"github.com/juanhuttemann/gochain/blockchain"
 	"github.com/juanhuttemann/gochain/network"
 	"github.com/juanhuttemann/gochain/wallet"
@@ -165,9 +166,14 @@ func (cli *CommandLine) send(from, to string, amount int, nodeID string, mineNow
 func (cli *CommandLine) Run() {
 	cli.validateArgs()
 
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	nodeID := os.Getenv("NODE_ID")
 	if nodeID == "" {
-		fmt.Printf("NODE_ID env is not set!")
+		fmt.Println("NODE_ID env is not set!")
 		runtime.Goexit()
 	}
 
