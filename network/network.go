@@ -15,7 +15,7 @@ import (
 
 	"gopkg.in/vrecan/death.v3"
 
-	"github.com/juanhuttemann/gochain/blockchain"
+	"github.com/gopherchain/gophercoin/blockchain"
 )
 
 const (

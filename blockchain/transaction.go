@@ -13,7 +13,7 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/juanhuttemann/gochain/wallet"
+	"github.com/gopherchain/gophercoin/wallet"
 )
 
 type Transaction struct {

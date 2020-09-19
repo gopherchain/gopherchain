@@ -8,10 +8,10 @@ import (
 	"runtime"
 	"strconv"
 
+	"github.com/gopherchain/gophercoin/blockchain"
+	"github.com/gopherchain/gophercoin/network"
+	"github.com/gopherchain/gophercoin/wallet"
 	"github.com/joho/godotenv"
-	"github.com/juanhuttemann/gochain/blockchain"
-	"github.com/juanhuttemann/gochain/network"
-	"github.com/juanhuttemann/gochain/wallet"
 )
 
 type CommandLine struct{}
