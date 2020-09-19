@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	dbPath      = "./blocks_%s"
+	dbPath      = "./blocks"
 	genesisData = "First Transaction from Genesis"
 )
 
@@ -34,8 +34,8 @@ func DBexists(path string) bool {
 }
 
 func InitBlockChain(address, nodeID string) *BlockChain {
-	path := fmt.Sprintf(dbPath, nodeID)
-	if DBexists(path) {
+	//path := fmt.Sprintf(dbPath, nodeID)
+	if DBexists(dbPath) {
 		fmt.Println("Blockchain already exists")
 		runtime.Goexit()
 	}
@@ -43,7 +43,7 @@ func InitBlockChain(address, nodeID string) *BlockChain {
 	var lastHash []byte
 	opts := badger.DefaultOptions(dbPath)
 
-	db, err := openDB(path, opts)
+	db, err := openDB(dbPath, opts)
 	Handle(err)
 
 	err = db.Update(func(txn *badger.Txn) error {
