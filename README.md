@@ -4,6 +4,9 @@
 </p>
 
 <div align="center">
+[![Go Report Card](https://goreportcard.com/badge/github.com/gopherchain/gophercoin)](https://goreportcard.com/report/github.com/gopherchain/gophercoin)
+
+</div>
 
 # Gopher Coin
 Blockchain made with Golang, based on [this](https://youtu.be/mYlHT9bB6OE) tutorial series.
