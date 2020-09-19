@@ -7,6 +7,7 @@
 <div align="center">
     
 [![Go Report Card](https://goreportcard.com/badge/github.com/gopherchain/gophercoin)](https://goreportcard.com/report/github.com/gopherchain/gophercoin)
+[![Build Status](https://travis-ci.com/gopherchain/gophercoin.svg?branch=master)](https://travis-ci.com/gopherchain/gophercoin)
 
 </div>
 
