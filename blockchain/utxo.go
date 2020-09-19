@@ -50,7 +50,7 @@ func (u UTXOSet) FindSpendableOutputs(pubKeyHash []byte, amount int) (int, map[s
 	return accumulated, unspentOuts
 }
 
-func (u UTXOSet) FindUTXO(pubKeyHash []byte) []TxOutput {
+func (u UTXOSet) FindUnspentTransactions(pubKeyHash []byte) []TxOutput {
 	var UTXOs []TxOutput
 
 	db := u.Blockchain.Database
@@ -66,14 +66,13 @@ func (u UTXOSet) FindUTXO(pubKeyHash []byte) []TxOutput {
 			v, err := item.ValueCopy(nil)
 			Handle(err)
 			outs := DeserializeOutputs(v)
-
 			for _, out := range outs.Outputs {
 				if out.IsLockedWithKey(pubKeyHash) {
 					UTXOs = append(UTXOs, out)
 				}
 			}
-		}
 
+		}
 		return nil
 	})
 	Handle(err)
