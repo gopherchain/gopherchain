@@ -3,7 +3,9 @@
     <br>
 </p>
 
+
 <div align="center">
+    
 [![Go Report Card](https://goreportcard.com/badge/github.com/gopherchain/gophercoin)](https://goreportcard.com/report/github.com/gopherchain/gophercoin)
 
 </div>
