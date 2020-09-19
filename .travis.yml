@@ -1,0 +1,30 @@
+language: go
+go:
+- 1.13.x
+before_install:
+- go get github.com/josephspurrier/goversioninfo/cmd/goversioninfo
+- go get github.com/mitchellh/gox
+install:
+- 
+script:
+- go get -t -v ./...
+- gox -os="linux" -arch="386 amd64"
+- env GOOS=windows GOARCH=amd64 go build -o gophercoin-windows-amd64.exe
+- env GOOS=windows GOARCH=386 go build -o gophercoin_windows-386.exe
+
+deploy:
+  edge: true
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  on:
+    repo: gopherchain/gophercoin
+    branches:    
+      only:      
+      - master 
+  skip_cleanup: true
+  file:
+  - gophercoin-windows-amd64.exe
+  - gophercoin_windows-386.exe
+  - gophercoin_linux-amd64
+  - gophercoin_linux-386
+  draft: true
