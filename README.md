@@ -13,4 +13,11 @@
 </div>
 
 # Gopher Coin
-Blockchain made with Golang, based on [this](https://youtu.be/mYlHT9bB6OE) tutorial series.
+Blockchain made with Golang.
+
+## Download
+
+https://github.com/gopherchain/gophercoin/releases/latest
+
+## Special thanks
+For [Tensor](https://github.com/tensor-programming) for [this](https://youtu.be/mYlHT9bB6OE) tutorial series on which this repo is based on.
