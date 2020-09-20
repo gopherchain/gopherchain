@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	dbPath      = "./blocks"
+	dbPath      = "./blocks/"
 	genesisData = "First Transaction from Genesis"
 )
 
@@ -34,16 +34,19 @@ func DBexists(path string) bool {
 }
 
 func InitBlockChain(address, nodeID string) *BlockChain {
-	//path := fmt.Sprintf(dbPath, nodeID)
-	if DBexists(dbPath) {
+	path := dbPath + nodeID
+	if DBexists(path) {
 		fmt.Println("Blockchain already exists")
 		runtime.Goexit()
 	}
 
-	var lastHash []byte
-	opts := badger.DefaultOptions(dbPath)
+	os.MkdirAll(dbPath, os.ModePerm)
 
-	db, err := openDB(dbPath, opts)
+	var lastHash []byte
+	opts := badger.DefaultOptions(path)
+	opts.Logger = nil
+
+	db, err := openDB(path, opts)
 	Handle(err)
 
 	err = db.Update(func(txn *badger.Txn) error {
@@ -67,7 +70,7 @@ func InitBlockChain(address, nodeID string) *BlockChain {
 }
 
 func ContinueBlockChain(nodeID string) *BlockChain {
-	path := fmt.Sprintf(dbPath, nodeID)
+	path := dbPath + nodeID
 	if DBexists(path) == false {
 		fmt.Println("No existing blockchain found, create one!")
 		runtime.Goexit()
@@ -75,7 +78,8 @@ func ContinueBlockChain(nodeID string) *BlockChain {
 
 	var lastHash []byte
 
-	opts := badger.DefaultOptions(dbPath)
+	opts := badger.DefaultOptions(path)
+	opts.Logger = nil
 
 	db, err := openDB(path, opts)
 	Handle(err)
