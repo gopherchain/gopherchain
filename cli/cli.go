@@ -11,7 +11,6 @@ import (
 	"github.com/gopherchain/gophercoin/blockchain"
 	"github.com/gopherchain/gophercoin/network"
 	"github.com/gopherchain/gophercoin/wallet"
-	"github.com/joho/godotenv"
 )
 
 type CommandLine struct{}
@@ -165,11 +164,6 @@ func (cli *CommandLine) send(from, to string, amount int, nodeID string, mineNow
 
 func (cli *CommandLine) Run() {
 	cli.validateArgs()
-
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 
 	nodeID := os.Getenv("NODE_ID")
 	if nodeID == "" {
