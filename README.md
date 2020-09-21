@@ -31,6 +31,9 @@ git clone https://github.com/gopherchain/gophercoin.git
 cd gophercoin
 go build
 ```
+## Pending
+- [ ] Dynamically adjust mining difficulty.
+
 
 ## Special thanks
 To [Tensor](https://github.com/tensor-programming) for [this](https://youtu.be/mYlHT9bB6OE) tutorial series on which this repo is based on.
