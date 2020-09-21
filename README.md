@@ -33,4 +33,4 @@ go build
 ```
 
 ## Special thanks
-For [Tensor](https://github.com/tensor-programming) for [this](https://youtu.be/mYlHT9bB6OE) tutorial series on which this repo is based on.
+To [Tensor](https://github.com/tensor-programming) for [this](https://youtu.be/mYlHT9bB6OE) tutorial series on which this repo is based on.
