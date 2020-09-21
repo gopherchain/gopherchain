@@ -19,5 +19,18 @@ Blockchain made with Golang.
 
 https://github.com/gopherchain/gophercoin/releases/latest
 
+## Building from source
+Note: go version 1.13 or higher is required building it from the source.
+
+#### Clone
+```
+git clone https://github.com/gopherchain/gophercoin.git
+```
+#### Build
+```
+cd gophercoin
+go build
+```
+
 ## Special thanks
 For [Tensor](https://github.com/tensor-programming) for [this](https://youtu.be/mYlHT9bB6OE) tutorial series on which this repo is based on.
