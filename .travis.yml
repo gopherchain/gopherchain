@@ -9,6 +9,7 @@ install:
 script:
 - go get -t -v ./...
 - gox -os="linux" -arch="amd64"
+- goversioninfo -icon=./gophercoin.ico
 - env GOOS=windows GOARCH=amd64 go build -o gophercoin-windows-amd64.exe
 - env GOOS=linux GOARCH=amd64 go build -o gophercoin-linux-amd64
 
