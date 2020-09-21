@@ -13,11 +13,28 @@
 </div>
 
 # Gopher Coin
-Blockchain made with Golang.
+Blockchain based cryptocurrency written in Golang.
 
 ## Download
 
 https://github.com/gopherchain/gophercoin/releases/latest
 
+## Building from source
+Note: go version 1.13 or higher is required building it from the source.
+
+#### Clone
+```
+git clone https://github.com/gopherchain/gophercoin.git
+```
+#### Build
+```
+cd gophercoin
+go build
+```
+## Pending
+- [ ] Dynamically adjust mining difficulty.
+- [ ] Add halving algorithm.
+
+
 ## Special thanks
-For [Tensor](https://github.com/tensor-programming) for [this](https://youtu.be/mYlHT9bB6OE) tutorial series on which this repo is based on.
+To [Tensor](https://github.com/tensor-programming) for [this](https://youtu.be/mYlHT9bB6OE) tutorial series on which this repo is based on.
