@@ -33,6 +33,7 @@ go build
 ```
 ## Pending
 - [ ] Dynamically adjust mining difficulty.
+- [ ] Add halving algorithm.
 
 
 ## Special thanks
