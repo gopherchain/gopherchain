@@ -13,7 +13,7 @@
 
 </div>
 
-# Gopher Coin
+# Gopher Chain
 Blockchain based cryptocurrency written in Golang. For educational and/or research purposes only.
 
 ## Download
