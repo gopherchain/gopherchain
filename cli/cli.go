@@ -8,9 +8,9 @@ import (
 	"runtime"
 	"strconv"
 
-	"github.com/gopherchain/gophercoin/blockchain"
-	"github.com/gopherchain/gophercoin/network"
-	"github.com/gopherchain/gophercoin/wallet"
+	"github.com/gopherchain/gopherchain/blockchain"
+	"github.com/gopherchain/gopherchain/network"
+	"github.com/gopherchain/gopherchain/wallet"
 )
 
 type CommandLine struct{}

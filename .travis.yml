@@ -7,21 +7,21 @@ install:
 - 
 script:
 - go get -t -v ./...
-- env GOOS=linux GOARCH=amd64 go build -o gophercoin-linux-amd64
-- goversioninfo -icon=./gophercoin.ico
-- env GOOS=windows GOARCH=amd64 go build -o gophercoin-windows-amd64.exe
+- env GOOS=linux GOARCH=amd64 go build -o gopherchain-linux-amd64
+- goversioninfo -icon=./gopherchain.ico
+- env GOOS=windows GOARCH=amd64 go build -o gopherchain-windows-amd64.exe
 
 deploy:
   edge: true
   provider: releases
   api_key: $GITHUB_TOKEN
   on:
-    repo: gopherchain/gophercoin
+    repo: gopherchain/gopherchain
     branches:    
       only:      
       - master 
   skip_cleanup: true
   file:
-  - gophercoin-windows-amd64.exe
-  - gophercoin-linux-amd64
+  - gopherchain-windows-amd64.exe
+  - gopherchain-linux-amd64
   draft: true

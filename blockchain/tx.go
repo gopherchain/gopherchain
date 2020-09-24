@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/gob"
 
-	"github.com/gopherchain/gophercoin/wallet"
+	"github.com/gopherchain/gopherchain/wallet"
 )
 
 type TxInput struct {
