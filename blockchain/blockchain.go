@@ -33,8 +33,8 @@ func DBexists(path string) bool {
 	return true
 }
 
-func InitBlockChain(address, nodeID string) *BlockChain {
-	path := dbPath + nodeID
+func InitBlockChain(address string) *BlockChain {
+	path := dbPath
 	if DBexists(path) {
 		fmt.Println("Blockchain already exists")
 		runtime.Goexit()
@@ -70,7 +70,7 @@ func InitBlockChain(address, nodeID string) *BlockChain {
 }
 
 func ContinueBlockChain(nodeID string) *BlockChain {
-	path := dbPath + nodeID
+	path := dbPath
 	if DBexists(path) == false {
 		fmt.Println("No existing blockchain found, create one!")
 		runtime.Goexit()

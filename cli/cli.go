@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"runtime"
 	"strconv"
@@ -37,6 +38,10 @@ func (cli *CommandLine) validateArgs() {
 func (cli *CommandLine) StartNode(nodeID, minerAddress string) {
 	fmt.Printf("Starting Node %s\n", nodeID)
 
+	fs := http.FileServer(http.Dir("./blocks"))
+
+	log.Fatal(http.ListenAndServe(":3002", fs))
+
 	if len(minerAddress) > 0 {
 		if wallet.ValidateAddress(minerAddress) {
 			fmt.Println("Mining is on. Address to receive rewards: ", minerAddress)
@@ -57,8 +62,8 @@ func (cli *CommandLine) reindexUTXO(nodeID string) {
 	fmt.Printf("Done! There are %d transactions in the UTXO set.\n", count)
 }
 
-func (cli *CommandLine) listAddresses(nodeID string) {
-	wallets, _ := wallet.CreateWallets(nodeID)
+func (cli *CommandLine) listAddresses() {
+	wallets, _ := wallet.CreateWallets()
 	addresses := wallets.GetAllAddresses()
 
 	for _, address := range addresses {
@@ -67,10 +72,10 @@ func (cli *CommandLine) listAddresses(nodeID string) {
 
 }
 
-func (cli *CommandLine) createWallet(nodeID string) {
-	wallets, _ := wallet.CreateWallets(nodeID)
+func (cli *CommandLine) createWallet() {
+	wallets, _ := wallet.CreateWallets()
 	address := wallets.AddWallet()
-	wallets.SaveFile(nodeID)
+	wallets.SaveFile()
 
 	fmt.Printf("New address is: %s\n", address)
 }
@@ -102,7 +107,7 @@ func (cli *CommandLine) createBlockChain(address, nodeID string) {
 	if !wallet.ValidateAddress(address) {
 		log.Panic("Address is not Valid")
 	}
-	chain := blockchain.InitBlockChain(address, nodeID)
+	chain := blockchain.InitBlockChain(address)
 	defer chain.Database.Close()
 
 	UTXOSet := blockchain.UTXOSet{chain}
@@ -142,7 +147,7 @@ func (cli *CommandLine) send(from, to string, amount int, nodeID string, mineNow
 	UTXOSet := blockchain.UTXOSet{chain}
 	defer chain.Database.Close()
 
-	wallets, err := wallet.CreateWallets(nodeID)
+	wallets, err := wallet.CreateWallets()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -255,10 +260,10 @@ func (cli *CommandLine) Run() {
 	}
 
 	if createWalletCmd.Parsed() {
-		cli.createWallet(nodeID)
+		cli.createWallet()
 	}
 	if listAddressesCmd.Parsed() {
-		cli.listAddresses(nodeID)
+		cli.listAddresses()
 	}
 	if reindexUTXOCmd.Parsed() {
 		cli.reindexUTXO(nodeID)
