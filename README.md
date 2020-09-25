@@ -33,6 +33,7 @@ cd gopherchain
 go build
 ```
 ## Pending
+- [ ] Network deployment.
 - [ ] Dynamically adjust mining difficulty.
 - [ ] Add halving algorithm.
 
