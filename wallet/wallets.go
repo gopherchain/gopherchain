@@ -12,7 +12,7 @@ import (
 
 const (
 	walletDir        = "./mywallets"
-	walletFile       = "wallets_%s.data"
+	walletFile       = "wallets.data"
 	pathToWalletFile = walletDir + "/" + walletFile
 )
 
@@ -30,11 +30,11 @@ func (ws *Wallets) GetAllAddresses() []string {
 	return addresses
 }
 
-func CreateWallets(nodeID string) (*Wallets, error) {
+func CreateWallets() (*Wallets, error) {
 	wallets := Wallets{}
 	wallets.Wallets = make(map[string]*Wallet)
 
-	err := wallets.LoadFile(nodeID)
+	err := wallets.LoadFile()
 	return &wallets, err
 }
 
@@ -51,8 +51,8 @@ func (ws Wallets) GetWallet(address string) Wallet {
 	return *ws.Wallets[address]
 }
 
-func (ws *Wallets) LoadFile(nodeID string) error {
-	walletFile := fmt.Sprintf(walletFile, nodeID)
+func (ws *Wallets) LoadFile() error {
+	walletFile := fmt.Sprintf(walletFile)
 	if _, err := os.Stat(walletFile); os.IsNotExist(err) {
 		return err
 	}
@@ -89,10 +89,10 @@ func (ws *Wallets) LoadFile(nodeID string) error {
 	return nil
 }
 
-func (ws *Wallets) SaveFile(nodeID string) {
+func (ws *Wallets) SaveFile() {
 	var content bytes.Buffer
 
-	walletFile := fmt.Sprintf(walletFile, nodeID)
+	walletFile := fmt.Sprintf(walletFile)
 
 	gob.Register(elliptic.P256())
 

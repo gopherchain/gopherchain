@@ -1,6 +1,7 @@
 package network
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/gob"
 	"encoding/hex"
@@ -11,6 +12,7 @@ import (
 	"net"
 	"os"
 	"runtime"
+	"strings"
 	"syscall"
 
 	"gopkg.in/vrecan/death.v3"
@@ -27,7 +29,6 @@ const (
 var (
 	nodeAddress     string
 	minerAddress    string
-	KnownNodes      = []string{"localhost:3000"}
 	blocksInTransit = [][]byte{}
 	memoryPool      = make(map[string]blockchain.Transaction)
 )
@@ -66,6 +67,56 @@ type Version struct {
 	Version    int
 	BestHeight int
 	AddrFrom   string
+}
+
+var KnownNodes = KnownNodesReader()
+
+func KnownNodesReader() []string {
+	filename := "nodes"
+	if fileExists(filename) == false {
+		fmt.Println("Nodes file not found")
+		defaultNodeConfig(filename)
+
+	} else {
+		if fileEmpty(filename) == true {
+			fmt.Println("Nodes file empty")
+			defaultNodeConfig(filename)
+		}
+	}
+
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Panic(err)
+	}
+	defer file.Close()
+
+	var knownNodes []string
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+
+	for scanner.Scan() {
+		if len(scanner.Text()) > 0 {
+			knownNodes = append(knownNodes, scanner.Text())
+		}
+	}
+
+	return knownNodes
+}
+
+func updateNodes(filename string, newNodes []string) {
+	err := os.Remove(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Panic(err)
+	}
+
+	if _, err := file.WriteString(strings.Join(newNodes, "\n")); err != nil {
+		log.Println(err)
+	}
+	file.Close()
 }
 
 func CmdToBytes(cmd string) []byte {
@@ -159,17 +210,17 @@ func SendData(addr string, data []byte) {
 	conn, err := net.Dial(protocol, addr)
 
 	if err != nil {
-		fmt.Printf("%s is not availabel\n", addr)
-		var updatedNodes []string
+		fmt.Printf("%s is not available\n", addr)
+		var updatedNodesList []string
 
 		for _, node := range KnownNodes {
 			if node != addr {
-				updatedNodes = append(updatedNodes, node)
+				updatedNodesList = append(updatedNodesList, node)
 			}
 		}
 
-		KnownNodes = updatedNodes
-
+		updateNodes("nodes", updatedNodesList)
+		KnownNodes = KnownNodesReader()
 		return
 	}
 
