@@ -159,7 +159,7 @@ func SendData(addr string, data []byte) {
 	conn, err := net.Dial(protocol, addr)
 
 	if err != nil {
-		fmt.Printf("%s is not availabel\n", addr)
+		fmt.Printf("%s is not available\n", addr)
 		var updatedNodes []string
 
 		for _, node := range KnownNodes {
