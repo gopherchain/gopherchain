@@ -37,7 +37,7 @@ func defaultNodeConfig(filename string) {
 	}
 	defer f.Close()
 
-	if _, err := f.WriteString("localhost:777\n"); err != nil {
+	if _, err := f.WriteString("178.128.134.203:3000\n"); err != nil {
 		log.Println(err)
 	}
 }
