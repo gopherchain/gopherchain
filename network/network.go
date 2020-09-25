@@ -515,7 +515,7 @@ func CloseDB(chain *blockchain.BlockChain) {
 }
 
 func StartServer(nodeID, minerAddress string) {
-	nodeAddress = fmt.Sprintf("localhost:%s", nodeID)
+	nodeAddress = fmt.Sprintf("0.0.0.0:%s", nodeID)
 	mineAddress = minerAddress
 
 	ln, err := net.Listen(protocol, nodeAddress)
