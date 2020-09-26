@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"runtime"
 	"strconv"
@@ -37,11 +38,11 @@ func (cli *CommandLine) validateArgs() {
 func (cli *CommandLine) StartNode(nodeID, minerAddress string) {
 	fmt.Printf("Starting Node %s\n", nodeID)
 
-	/*	go func() {
+	go func() {
 		fs := http.FileServer(http.Dir("./blocks"))
 
 		log.Fatal(http.ListenAndServe(":3002", fs))
-	}()*/
+	}()
 
 	if len(minerAddress) > 0 {
 		if wallet.ValidateAddress(minerAddress) {

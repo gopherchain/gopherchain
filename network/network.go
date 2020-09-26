@@ -69,7 +69,7 @@ type Version struct {
 	AddrFrom   string
 }
 
-var KnownNodes = KnownNodesReader()
+var KnownNodes = []string{"localhost:4444"}
 
 func KnownNodesReader() []string {
 	filename := "nodes"
@@ -77,11 +77,6 @@ func KnownNodesReader() []string {
 		fmt.Println("Nodes file not found")
 		defaultNodeConfig(filename)
 
-	} else {
-		if fileEmpty(filename) == true {
-			fmt.Println("Nodes file empty")
-			defaultNodeConfig(filename)
-		}
 	}
 
 	file, err := os.Open(filename)
@@ -515,7 +510,7 @@ func CloseDB(chain *blockchain.BlockChain) {
 }
 
 func StartServer(nodeID, minerAddress string) {
-	nodeAddress = ":" + nodeID
+	nodeAddress = fmt.Sprintf("localhost:%s", nodeID)
 	mineAddress = minerAddress
 
 	ln, err := net.Listen(protocol, nodeAddress)

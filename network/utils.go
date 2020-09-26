@@ -15,19 +15,6 @@ func fileExists(filename string) bool {
 	return true
 }
 
-func fileEmpty(filename string) bool {
-	file, err := os.Stat(filename)
-	if err != nil {
-		log.Panic(err)
-	}
-
-	if file.Size() == 0 {
-		return true
-	}
-
-	return false
-}
-
 func defaultNodeConfig(filename string) {
 	fmt.Println("Creating default nodes file")
 	f, err := os.OpenFile(filename,
