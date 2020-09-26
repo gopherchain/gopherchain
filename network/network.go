@@ -69,7 +69,7 @@ type Version struct {
 	AddrFrom   string
 }
 
-var KnownNodes = []string{"localhost:4444"}
+var KnownNodes = []string{"204.48.19.128:3000"}
 
 func KnownNodesReader() []string {
 	filename := "nodes"
@@ -444,7 +444,7 @@ func HandleVersion(request []byte, chain *blockchain.BlockChain) {
 
 	buff.Write(request[commandLength:])
 	dec := gob.NewDecoder(&buff)
-	err := dec.Decode(&buff)
+	err := dec.Decode(&payload)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -510,7 +510,7 @@ func CloseDB(chain *blockchain.BlockChain) {
 }
 
 func StartServer(nodeID, minerAddress string) {
-	nodeAddress = fmt.Sprintf("localhost:%s", nodeID)
+	nodeAddress = fmt.Sprintf(":%s", nodeID)
 	mineAddress = minerAddress
 
 	ln, err := net.Listen(protocol, nodeAddress)
