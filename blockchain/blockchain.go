@@ -69,11 +69,20 @@ func InitBlockChain(address string) *BlockChain {
 
 }
 
-func ContinueBlockChain(nodeID string) *BlockChain {
+func ContinueBlockChain(knownNode string) *BlockChain {
 	path := dbPath
 	if DBexists(path) == false {
-		fmt.Println("No existing blockchain found, create one!")
-		runtime.Goexit()
+		fmt.Println("No existing blockchain found")
+		for _, file := range ListFiles() {
+			fmt.Println(file)
+			if file != "LOCK" {
+				url := fmt.Sprintf("http://%s/%s", knownNode, file)
+				DownloadBlockchain(url, "./blocks")
+			}
+		}
+
+		fmt.Println("Blockchain download complete!")
+		fmt.Println("Running node")
 	}
 
 	var lastHash []byte

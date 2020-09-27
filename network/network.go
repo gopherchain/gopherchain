@@ -70,6 +70,7 @@ type Version struct {
 }
 
 var KnownNodes = []string{"204.48.19.128:3000"}
+var KnownNodesDir = []string{"204.48.19.128:3002"}
 
 func KnownNodesReader() []string {
 	filename := "nodes"
@@ -519,7 +520,7 @@ func StartServer(nodeID, minerAddress string) {
 	}
 	defer ln.Close()
 
-	chain := blockchain.ContinueBlockChain(nodeID)
+	chain := blockchain.ContinueBlockChain(KnownNodesDir[0])
 	defer chain.Database.Close()
 	go CloseDB(chain)
 
