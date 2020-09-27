@@ -207,16 +207,18 @@ func SendData(addr string, data []byte) {
 
 	if err != nil {
 		fmt.Printf("%s is not available\n", addr)
-		var updatedNodesList []string
+		var updatedNodes []string
 
 		for _, node := range KnownNodes {
 			if node != addr {
-				updatedNodesList = append(updatedNodesList, node)
+				updatedNodes = append(updatedNodes, node)
 			}
 		}
 
-		updateNodes("nodes", updatedNodesList)
-		KnownNodes = KnownNodesReader()
+		//updateNodes("nodes", updatedNodesList)
+		//KnownNodes = KnownNodesReader()
+		KnownNodes = updatedNodes
+
 		return
 	}
 
